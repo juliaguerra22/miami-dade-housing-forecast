@@ -13,12 +13,14 @@ We built a **Random Forest regression model**, chosen because prior research (Yo
   - Predictive variables (features) from **2010** to train on changes observed in **2020**.
   
 **Features**
+
 The key features used to predict housing prices include:
 - Median rent
 - Median household income
 - Levels of educational attainment
 
 **Model Evaluation**
+
 We will evaluate model performance primarily using regression metrics such as:
 - Mean Squared Error **(MSE)**
 - Mean Absolute Error **(MAE)**
