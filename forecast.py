@@ -46,10 +46,8 @@ mae = mean_absolute_error(y_test, y_pred)
 print("MSE:", mse) 
 print("MAE:",mae)
 print("5 Predictions vs Actual:")
-<<<<<<< HEAD
 print("Pred:", y_pred[:10])
 print("Real:", y_test.values[:10])
-
 
 # bar-plot
 
@@ -68,7 +66,3 @@ plt.xlabel("Actual 2020 Rent")
 plt.ylabel("Predicted 2020 Rent")
 plt.title("Predicted vs Actual")
 plt.show()
-=======
-print("Pred:", y_pred[:5])
-print("Real:", y_test.values[:5])
->>>>>>> ee6cd32757eda34b2718c86a508837fa4743914f
