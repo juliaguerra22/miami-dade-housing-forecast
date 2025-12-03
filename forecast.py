@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+import matplotlib.pyplot as plt
 
 df_2010= pd.read_csv('data_2010.csv')
 df_2020= pd.read_csv('data_2020.csv')
@@ -48,5 +49,24 @@ mae = mean_absolute_error(y_test, y_pred)
 print("MSE:", mse) 
 print("MAE:",mae)
 print("5 Predictions vs Actual:")
-print("Pred:", y_pred[:5])
-print("Real:", y_test.values[:5])
+print("Pred:", y_pred[:10])
+print("Real:", y_test.values[:10])
+
+
+# bar-plot
+
+importances = model.feature_importances_
+
+plt.bar(features, importances)
+plt.title("Feature Importance")
+plt.ylabel("Importance", fontsize="8")
+plt.show()
+plt.pause(1)
+
+
+plt.scatter(y_test, y_pred, c='blue', s=50)
+plt.plot([1000, 4000], [1000, 4000], c='red')
+plt.xlabel("Actual 2020 Rent")
+plt.ylabel("Predicted 2020 Rent")
+plt.title("Predicted vs Actual")
+plt.show()
