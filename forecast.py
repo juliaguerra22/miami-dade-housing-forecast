@@ -9,9 +9,6 @@ import matplotlib.pyplot as plt
 df_2010= pd.read_csv('data_2010.csv')
 df_2020= pd.read_csv('data_2020.csv')
 
-df_2010 = df_2010.iloc[:-1] #https://stackoverflow.com/questions/60698147/how-to-drop-a-row-using-iloc-method Temporary fix: for now i tried this to remove last row containing string data that caused errors
-df_2020 = df_2020.iloc[:-1] 
-
 #selecting columns
 geo_ID = "GeoID"
 income_col= 'Median Household Income'
@@ -49,6 +46,7 @@ mae = mean_absolute_error(y_test, y_pred)
 print("MSE:", mse) 
 print("MAE:",mae)
 print("5 Predictions vs Actual:")
+<<<<<<< HEAD
 print("Pred:", y_pred[:10])
 print("Real:", y_test.values[:10])
 
@@ -70,3 +68,7 @@ plt.xlabel("Actual 2020 Rent")
 plt.ylabel("Predicted 2020 Rent")
 plt.title("Predicted vs Actual")
 plt.show()
+=======
+print("Pred:", y_pred[:5])
+print("Real:", y_test.values[:5])
+>>>>>>> ee6cd32757eda34b2718c86a508837fa4743914f
