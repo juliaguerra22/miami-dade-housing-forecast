@@ -3,15 +3,50 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 df_2010= pd.read_csv('data_2010.csv')
 df_2020= pd.read_csv('data_2020.csv')
 
+df_2010 = df_2010.iloc[:-1] #https://stackoverflow.com/questions/60698147/how-to-drop-a-row-using-iloc-method Temporary fix: for now i tried this to remove last row containing string data that caused errors
+df_2020 = df_2020.iloc[:-1] 
+
+#selecting columns
+geo_ID = "GeoID"
 income_col= 'Median Household Income'
 rent_col= 'Median Gross Rent'
 edu_col= "Percent Population with At Least Bachelor's Degree"
+df_2010_simple = df_2010[[geo_ID,income_col, rent_col, edu_col]]
+df_2020_simple = df_2020[[geo_ID,income_col, rent_col, edu_col]]
 
-df_2010_simple = df_2010[[income_col, rent_col, edu_col]]
-df_2020_simple = df_2020[[income_col, rent_col, edu_col]]
+#replacing missing values with column mean
+df_2010.fillna(df_2010.mean(numeric_only=True), inplace=True)
+df_2020.fillna(df_2020.mean(numeric_only=True), inplace=True)
 
+#matching 2010 and 2020 by zip code(geo_ID)
+data = pd.merge(df_2010_simple, df_2020_simple, on=geo_ID, suffixes=('_2010', '_2020'))
+data = data.dropna() #revoe rows with missing values after merging
+
+#using features(2010) to predict target(2020 rent)
+features = ['Median Household Income_2010', 'Median Gross Rent_2010', "Percent Population with At Least Bachelor's Degree_2010"]
+X = data[features]
+y = data['Median Gross Rent_2020']
+
+#spliting data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#training the model
+model = RandomForestRegressor(n_estimators=200, random_state=42)
+model.fit(X_train, y_train)
+
+# predict and check accuracy
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+
+
+print("MSE:", mse) 
+print("MAE:",mae)
+print("5 Predictions vs Actual:")
+print("Pred:", y_pred[:5])
+print("Real:", y_test.values[:5])
