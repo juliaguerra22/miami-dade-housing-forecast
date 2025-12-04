@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
@@ -33,36 +34,64 @@ y = data['Median Gross Rent_2020']
 #spliting data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+# 1) Random Forest model
 #training the model
-model = RandomForestRegressor(n_estimators=200, random_state=42)
-model.fit(X_train, y_train)
+r_model = RandomForestRegressor(n_estimators=200, random_state=42)
+r_model.fit(X_train, y_train)
+r_pred = r_model.predict(X_test)
+r_mse = mean_squared_error(y_test, r_pred)
+r_mae = mean_absolute_error(y_test, r_pred)
 
-# predict and check accuracy
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-mae = mean_absolute_error(y_test, y_pred)
+# 2) Decision Tree model
+dt_model = DecisionTreeRegressor(random_state=42) 
+dt_model.fit(X_train, y_train)
+dt_pred = dt_model.predict(X_test)
+dt_mse = mean_squared_error(y_test, dt_pred)
+dt_mae = mean_absolute_error(y_test, dt_pred)
 
-
-print("MSE:", mse) 
-print("MAE:",mae)
+#printing random forest results
+print("RANDOM FOREST RESULTS")
+print("MSE:", r_mse)
+print("MAE:", r_mae)
 print("5 Predictions vs Actual:")
-print("Pred:", y_pred[:10])
-print("Real:", y_test.values[:10])
+print("Pred:", r_pred[:5])
+print("Real:", y_test.values[:5])
 
-# bar-plot
+#decision tree results
+print("DECISION TREE RESULTS")
+print("MSE:", dt_mse)
+print("MAE:", dt_mae)
+print("5 Predictions vs Actual:")
+print("Pred:", dt_pred[:5])
+print("Real:", y_test.values[:5])
 
-importances = model.feature_importances_
-
-plt.bar(features, importances)
-plt.title("Feature Importance")
-plt.ylabel("Importance", fontsize="8")
-plt.show()
-plt.pause(1)
-
-
-plt.scatter(y_test, y_pred, c='blue', s=50)
-plt.plot([1000, 4000], [1000, 4000], c='red')
+#bar plot for Random Forest 
+plt.scatter(y_test, r_pred, c='blue', s=50)
+plt.plot([1000, 4000], [1000, 4000], 'r-') 
 plt.xlabel("Actual 2020 Rent")
 plt.ylabel("Predicted 2020 Rent")
-plt.title("Predicted vs Actual")
+plt.title("Random Forest: Predicted vs Actual")
 plt.show()
+
+#bar plot for Decision Tree
+plt.scatter(y_test, dt_pred, c='green', s=50)
+plt.scatter([1000, 4000], [1000, 4000], 'r-')  
+plt.xlabel("Actual 2020 Rent")
+plt.ylabel("Predicted 2020 Rent")
+plt.title("Decision Tree: Predicted vs Actual")
+plt.show()
+
+#bar plot comparing errors
+models = ['Random Forest', 'Decision Tree']
+mse_values = [r_mse, dt_mse]
+mae_values = [r_mae, dt_mae]
+plt.bar(models, mse_values)
+plt.title("MSE: Random Forest vs Decision Tree")
+plt.ylabel("MSE")
+plt.show()
+
+plt.bar(models, mae_values)
+plt.title("MAE: Random Forest vs Decision Tree")
+plt.ylabel("MAE")
+plt.show()
+
