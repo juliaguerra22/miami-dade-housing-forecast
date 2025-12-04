@@ -75,7 +75,7 @@ plt.show()
 
 #bar plot for Decision Tree
 plt.scatter(y_test, dt_pred, c='green', s=50)
-plt.scatter([1000, 4000], [1000, 4000], 'r-')  
+plt.plot([y_test.min(),y_test.max()],[y_test.min(), y_test.max()], 'r-')
 plt.xlabel("Actual 2020 Rent")
 plt.ylabel("Predicted 2020 Rent")
 plt.title("Decision Tree: Predicted vs Actual")
