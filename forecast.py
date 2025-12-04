@@ -14,9 +14,10 @@ df_2020= pd.read_csv('data_2020.csv')
 geo_ID = "GeoID"
 income_col= 'Median Household Income'
 rent_col= 'Median Gross Rent'
+pov_col= "Percent Poverty"
 edu_col= "Percent Population with At Least Bachelor's Degree"
-df_2010_simple = df_2010[[geo_ID,income_col, rent_col, edu_col]]
-df_2020_simple = df_2020[[geo_ID,income_col, rent_col, edu_col]]
+df_2010_simple = df_2010[[geo_ID,income_col, rent_col, pov_col, edu_col]]
+df_2020_simple = df_2020[[geo_ID,income_col, rent_col, pov_col, edu_col]]
 
 #replacing missing values with column mean
 df_2010.fillna(df_2010.mean(numeric_only=True), inplace=True)
@@ -27,7 +28,7 @@ data = pd.merge(df_2010_simple, df_2020_simple, on=geo_ID, suffixes=('_2010', '_
 data = data.dropna() #revoe rows with missing values after merging
 
 #using features(2010) to predict target(2020 rent)
-features = ['Median Household Income_2010', 'Median Gross Rent_2010', "Percent Population with At Least Bachelor's Degree_2010"]
+features = ['Median Household Income_2010', 'Median Gross Rent_2010', "Percent Poverty_2010", "Percent Population with At Least Bachelor's Degree_2010"]
 X = data[features]
 y = data['Median Gross Rent_2020']
 
@@ -94,4 +95,14 @@ plt.bar(models, mae_values)
 plt.title("MAE: Random Forest vs Decision Tree")
 plt.ylabel("MAE")
 plt.show()
+
+#top 5 highest poverty zip codes' percent of income spent on rent
+top5= data.nlargest(5, 'Percent Poverty_2010')
+top5['Rent_to_Income_Ratio_2020']=(top5['Median Gross Rent_2020']/(top5['Median Household Income_2020']/12))*100
+plt.bar(top5[geo_ID].astype(str), top5['Rent_to_Income_Ratio_2020'])
+plt.title("Top 5 Highest Poverty ZIP Codes' Percent of Income Spent on Rent")
+plt.ylabel("Percent of Income Spent on Rent")
+plt.xlabel("ZIP Code")
+plt.show()
+
 
