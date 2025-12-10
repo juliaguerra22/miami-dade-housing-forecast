@@ -118,4 +118,20 @@ plt.title('Average Rent Increase: Miami-Dade vs Sumter')
 plt.ylabel('Average Rent Increase (2010–2020)')
 plt.show()
 
+##identifying zip codes where rent >30% of income in 2020
+data['Rent_to_Income_Ratio_2020']= (data['Median Gross Rent_2020']/(data['Median Household Income_2020']/12))*100
+affected= data[data['Rent_to_Income_Ratio_2020'] > 30]
+affected= affected.sort_values(geo_ID)
+labels= affected.apply(lambda row: f"{int(row[geo_ID])} (Income=${int(row['Median Household Income_2020']):,})", axis=1) #also adding income to label to see what income levels are affected
+plt.figure(figsize=(12, 5))
+plt.bar(labels, affected['Rent_to_Income_Ratio_2020'])
+plt.axhline(30, color='red', linestyle='--', label='30% threshold')
+plt.title("Miami-Dade ZIP Codes Paying >30% of Income on Rent (2020)")
+plt.ylabel("Rent-to-Income Ratio")
+plt.xlabel("ZIP Code with 2020 Income)")
+plt.xticks(rotation=90)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
 
