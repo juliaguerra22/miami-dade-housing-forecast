@@ -105,4 +105,17 @@ plt.ylabel("Percent of Income Spent on Rent")
 plt.xlabel("ZIP Code")
 plt.show()
 
+#comparing avg rent increase in rural county vs dade
+sumter_2010= pd.read_csv('sumter_data_2010.csv')
+sumter_2020= pd.read_csv('sumter_data_2020.csv')
+s_2010= sumter_2010[[geo_ID, rent_col]]
+s_2020= sumter_2020[[geo_ID, rent_col]]
+s_data= pd.merge(s_2010, s_2020, on=geo_ID,suffixes=('_2010', '_2020')).dropna()
+miami_avg_increase= (data['Median Gross Rent_2020'] - data['Median Gross Rent_2010']).mean()
+sumter_avg_increase= (s_data['Median Gross Rent_2020'] - s_data['Median Gross Rent_2010']).mean()
+plt.bar(['Miami-Dade', 'Sumter'], [miami_avg_increase, sumter_avg_increase])
+plt.title('Average Rent Increase: Miami-Dade vs Sumter')
+plt.ylabel('Average Rent Increase (2010–2020)')
+plt.show()
+
 
