@@ -14,7 +14,7 @@ df_2020= pd.read_csv('data_2020.csv')
 geo_ID = "GeoID"
 income_col= 'Median Household Income'
 rent_col= 'Median Gross Rent'
-pov_col= "Percent Poverty"
+pov_col= 'Percent Poverty'
 edu_col= "Percent Population with At Least Bachelor's Degree"
 df_2010_simple = df_2010[[geo_ID,income_col, rent_col, pov_col, edu_col]]
 df_2020_simple = df_2020[[geo_ID,income_col, rent_col, pov_col, edu_col]]
@@ -74,6 +74,15 @@ plt.ylabel("Predicted 2020 Rent")
 plt.title("Random Forest: Predicted vs Actual")
 plt.show()
 
+#Random Forest feature importances
+rf_importance = r_model.feature_importances_
+plt.figure(figsize=(8, 5))
+plt.barh(features, rf_importance)
+plt.xlabel("Importance Score")
+plt.title("Random Forest - Feature Importance")
+plt.tight_layout()
+plt.show()
+
 #bar plot for Decision Tree
 plt.scatter(y_test, dt_pred, c='green', s=50)
 plt.plot([y_test.min(),y_test.max()],[y_test.min(), y_test.max()], 'r-')
@@ -91,6 +100,16 @@ plt.title("MSE: Random Forest vs Decision Tree")
 plt.ylabel("MSE")
 plt.show()
 
+#Decision Tree feature importances
+dt_importance = dt_model.feature_importances_
+plt.figure(figsize=(8, 5))
+plt.barh(features, dt_importance)
+plt.xlabel("Importance Score")
+plt.title("Decision Tree - Feature Importance")
+plt.tight_layout()
+plt.show()
+
+#model performance comparision based on MAE
 plt.bar(models, mae_values)
 plt.title("MAE: Random Forest vs Decision Tree")
 plt.ylabel("MAE")
@@ -134,4 +153,17 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-
+##calculating rent increase per ZIP
+data['Rent_Increase'] = data['Median Gross Rent_2020'] - data['Median Gross Rent_2010']
+income_median = data['Median Household Income_2020'].median()
+high_income = data[data['Median Household Income_2020'] >= income_median] 
+low_income  = data[data['Median Household Income_2020'] < income_median]
+high_income_increase = high_income['Rent_Increase'].mean() #average rent increase
+low_income_increase = low_income['Rent_Increase'].mean()
+print("High income ZIPs avg rent increase:", high_income_increase)
+print("Low income ZIPs avg rent increase:", low_income_increase)
+plt.figure()
+plt.bar(['High Income ZIPs', 'Low Income ZIPs'],[high_income_increase, low_income_increase])
+plt.title('Rent Increase: High vs Low Income ZIP Codes')
+plt.ylabel('Average Rent Increase')
+plt.show()
