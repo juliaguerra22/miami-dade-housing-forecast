@@ -167,3 +167,14 @@ plt.bar(['High Income ZIPs', 'Low Income ZIPs'],[high_income_increase, low_incom
 plt.title('Rent Increase: High vs Low Income ZIP Codes')
 plt.ylabel('Average Rent Increase')
 plt.show()
+
+#2030 rent burden projection using linear growth
+data['Predicted_Rent_2030'] = data['Median Gross Rent_2020'] * (data['Median Gross Rent_2020'] / data['Median Gross Rent_2010'])
+data['Rent_to_Income_Ratio_2030'] = (data['Predicted_Rent_2030'] / (data['Median Household Income_2020']/12)) * 100
+high_burden = data[data['Rent_to_Income_Ratio_2030'] > 30]
+plt.bar(range(len(high_burden)), high_burden['Rent_to_Income_Ratio_2030'])
+plt.title("2030 Projected Rent Burden (>30%)")
+plt.ylabel("Rent-to-Income Ratio (%)")
+plt.xlabel("ZIP Codes")
+plt.xticks([])  
+plt.show()
