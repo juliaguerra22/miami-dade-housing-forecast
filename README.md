@@ -58,5 +58,6 @@ Future work can improve this project by adding housing policy and climate risk d
 
 **Contributions**
 Task| Time Spent| Person
+---
 Collect Data and Preprocess it| 8 days | Julia
 
