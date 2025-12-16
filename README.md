@@ -8,7 +8,7 @@ We built a **Random Forest regression model**, chosen because prior research (Yo
 
 **Dataset**
 
-- The dataset is created by combining multiple public sources found in Policy Map from the **American Community Survey (ACS)** for Miami-Dade County zip codes from **2010** and **2020**.
+- The dataset is created by combining multiple public sources found in Policy Map from the **American Community Survey (ACS)** for Miami-Dade County zip codes from **2010** and **2020**. We also included **Sumter County** data from the same source for comparison purposes.
 - **This data includes:** Median rents, income levels, and education attainment all at the zip code level, with columns like **Median Gross Rent, Median Household Income, and Percent Population with At Least Bachelors Degree**. - After preprocessing and cleaning, the dataset includes:
   - Predictive variables (features) from **2010** to train on changes observed in **2020**.
   
