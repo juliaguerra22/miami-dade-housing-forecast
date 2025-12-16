@@ -42,7 +42,8 @@ We will evaluate model performance primarily using regression metrics such as:
 
 
 **Future Directions**
-
-Future work can enhance this project by incorporating housing policy and climate risk data to better explain the drivers of rent growth. We can include ZIP-code–level information on rent control and zoning changes to separate policy effects from market trends and make more actionable recommendations. We can also add coastal flooding and climate exposure data to examine whether displacement from flood-prone areas increases rents in nearby inland, lower-income ZIP codes, helping identify patterns of climate-driven gentrification.
+Future work can improve this project by adding housing policy and climate risk data to better understand drivers of rent growth. We can:
+- Integrate ZIP-code–level information on rent control, zoning changes, or upzoning to separate policy effects from market trends and support more actionable recommendations.
+- Add coastal flooding and climate exposure data to examine whether displacement from flood-prone areas contributes to rising rents in nearby inland, lower-income ZIP codes, helping identify patterns of climate-driven gentrification.
 
 
