@@ -69,7 +69,9 @@ Future work can improve this project by adding housing policy and climate risk d
 |Background |1 day| Julia|
 |Results |1 day| Aayusha|
 |Future directions |1 day| Both|
-|Edits Based on Milestone Two Feedback |
-|Add Rural County Rent Compared to Miami-Dade Rent |1 day| Julia|
+|Edits Based on Milestone Two Feedback ↓|
+|Analyze Rural County Rent Compared to Miami-Dade Rent |1 day| Julia|
 |Compare Rent Increases between Low/High-income ZIP codes |1 day| Aayusha|
 |Add Feature Importance Graph to Poster |1 day| Aayusha| 
+|Edit README file |1 day| Both| 
+
