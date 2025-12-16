@@ -11,9 +11,9 @@ This project analyses **Miami-Dade ZIP code data from 2010 and 2020** to underst
 **Dataset**
 
 - The dataset combines multiple publicly available sources from PolicyMap, using data from the **American Community Survey (ACS)** for **Miami-Dade County ZIP codes from 2010 and 2020**.
-- It includes key socioeconomic indicators such as **Median Gross Rent, Median Household Income, and Percent Population with at Least a Bachelor’s Degree**, all at the ZIP code level.
-- Additional data from **Sumter County**, including **GeoID** and **Median Gross Rent** for both years, was used to calculate and **compare average rent increase**s between 2010 and 2020.
-- After preprocessing and cleaning, the final dataset contains **predictive variables** from 2010 that were used to model and **analyze rent changes** observed in 2020.
+  - It includes key socioeconomic indicators such as **Median Gross Rent, Median Household Income, and Percent Population with at Least a Bachelor’s Degree**, all at the ZIP code level.
+  - Additional data from **Sumter County**, including **GeoID** and **Median Gross Rent** for both years, was used to calculate and **compare average rent increase**s between 2010 and 2020.
+  - After preprocessing and cleaning, the final dataset contains **predictive variables** from 2010 that were used to model and **analyze rent changes** observed in 2020.
 
 
 **Features**
