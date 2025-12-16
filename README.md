@@ -28,8 +28,7 @@ We will evaluate model performance primarily using regression metrics such as:
 **Replication Instructions**
 1. Clone the repository
 2. Ensure Python is installed (Python 3.8 is recommended)
-3. Run the main forecasting script: 
-  - python3 forecast.py
+3. Run the main forecasting script: python3 forecast.py
 4. The script performs the following: 
 - Preprocesses ACS ZIP-code–level data from 2010 and 2020 
 - Trains a Random Forest and a Decision Tree regression model 
