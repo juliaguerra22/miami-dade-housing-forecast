@@ -57,7 +57,18 @@ Future work can improve this project by adding housing policy and climate risk d
 
 
 **Contributions**
-Task| Time Spent| Person
----
-Collect Data and Preprocess it| 8 days | Julia
 
+Task| Time Spent| Person
+Collect Data and Preprocess it| 8 days | Julia
+Model Implementation and training| 7 days | Aayusha
+Model Evaluation and Validation | 3 days | Julia
+Final Poster Introduction |1 day| Julia
+Final Poster Experimental setup |1 day| Aayusha
+Summary + Conclusion |1 day| Both
+Background |1 day| Julia
+Results |1 day| Aayusha
+Future directions |1 day| Both
+Edits Based on Milestone Two Feedback 
+Add Rural County Rent Compared to Miami-Dade Rent |1 day| Julia
+Compare Rent Increases between Low/High-income ZIP codes |1 day| Aayusha
+Add Feature Importance Graph to Poster |1 day| Aayusha 
